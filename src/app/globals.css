@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #fdfaf5; /* fc-white */
+  color: #1c1510;            /* fc-night */
+}
