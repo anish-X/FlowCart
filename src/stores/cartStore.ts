@@ -27,6 +27,7 @@ interface CartStore {
 
   addItem: (product: CartProduct, color: string) => void;
   removeItem: (productId: string) => void;
+  setQty: (productId: string, qty: number) => void;
   openDrawer: () => void;
   closeDrawer: () => void;
 }
@@ -58,6 +59,13 @@ export const useCartStore = create<CartStore>((set, get) => ({
   removeItem: (productId) =>
     set((state) => ({
       items: state.items.filter((i) => i.product.id !== productId),
+    })),
+
+  setQty: (productId, qty) =>
+    set((state) => ({
+      items: state.items.map((i) =>
+        i.product.id === productId ? { ...i, quantity: qty } : i
+      ),
     })),
 
   openDrawer: () => set({ isDrawerOpen: true }),
