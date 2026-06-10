@@ -3,26 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-
-// Avatar initials chip — matches design system Avatar component visually
-const TONE_COLORS: Record<string, string> = {
-  rust:   "bg-[#B05432] text-white",
-  teal:   "bg-[#2F7E78] text-white",
-  rose:   "bg-[#C06B83] text-white",
-  indigo: "bg-[#485684] text-white",
-  moss:   "bg-[#6E7B46] text-white",
-};
-
-function Avatar({ initials, tone, size = 34 }: { initials: string; tone: string; size?: number }) {
-  return (
-    <span
-      className={`inline-flex items-center justify-center rounded-full font-body font-semibold ${TONE_COLORS[tone] ?? "bg-fc-earth text-fc-wheat"}`}
-      style={{ width: size, height: size, fontSize: size * 0.35 }}
-    >
-      {initials}
-    </span>
-  );
-}
+import Avatar from "@/components/ui/Avatar";
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
