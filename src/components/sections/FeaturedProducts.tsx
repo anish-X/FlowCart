@@ -116,20 +116,21 @@ export default function FeaturedProducts() {
                   key={c}
                   type="button"
                   onClick={() => setYarn(c)}
-                  className={`flex items-center gap-[6px] px-3 py-[6px] rounded-full border font-body text-[12px] font-medium transition-colors cursor-pointer ${
+                  className={`inline-flex items-center gap-2 min-h-[36px] px-[14px] py-[7px] rounded-full border font-body font-medium transition-colors cursor-pointer ${
                     active
-                      ? "bg-fc-earth text-fc-wheat border-fc-earth"
-                      : "bg-white text-fc-night border-fc-night/[0.12] hover:border-fc-earth/40"
+                      ? "bg-fc-night text-fc-wheat border-fc-night"
+                      : "bg-white text-fc-night border-fc-night/[0.12] hover:border-fc-night/30"
                   }`}
+                  style={{ fontSize: "0.8125rem" }}
                 >
                   {c !== "all" && (
                     <span
-                      className="w-[10px] h-[10px] rounded-full flex-none"
-                      style={{ background: YARN_CHIP_COLORS[c] }}
+                      className="w-[13px] h-[13px] rounded-full flex-none"
+                      style={{ background: YARN_CHIP_COLORS[c], border: "0.5px solid rgba(28,21,16,0.15)" }}
                     />
                   )}
                   {label}
-                  <span className={`text-[10px] ${active ? "text-fc-wheat/70" : "text-fc-night/40"}`}>
+                  <span className="text-[11px] opacity-55 tabular-nums">
                     {count}
                   </span>
                 </button>
