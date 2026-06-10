@@ -13,11 +13,12 @@ export interface Product {
   id: string;
   name: string;
   maker: string;
-  price: number;           // raw NPR value — format at render time
+  price: number;
   category: string;
   material: string;
-  swatches: YarnColor[];   // yarn colours this product comes in
-  wash: string;            // CSS gradient — placeholder for product photography
+  swatches: YarnColor[];
+  wash: string;            // gradient fallback if image fails
+  image: string;           // real Unsplash photo URL
   status: ProductStatus | null;
   blurb: string;
 }
@@ -43,6 +44,7 @@ export interface MakerSpotlight {
   location: string;
   initials: string;
   tone: string;
+  portrait: string;
   bio: string;
   quote: string;
   stats: [string, string][];
@@ -70,6 +72,7 @@ export const products: Product[] = [
     category: "Bags", material: "Organic cotton",
     status: { tone: "new", label: "New" }, swatches: ["moss", "turmeric"],
     wash: "linear-gradient(155deg, #DCE0B6, #B9C089)",
+    image: "https://images.unsplash.com/photo-1668072587859-f0f30c8fa938?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "Chunky organic cotton, made to order. Each one is slightly different — that's the point.",
   },
   {
@@ -77,6 +80,7 @@ export const products: Product[] = [
     category: "Accessories", material: "Wool blend",
     status: null, swatches: ["turmeric", "rose"],
     wash: "linear-gradient(155deg, #F0D49A, #E2B466)",
+    image: "https://images.unsplash.com/photo-1648005539099-709d5be525fb?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "A soft bouclé brim for slow summer mornings. Crocheted in a single afternoon, blocked overnight.",
   },
   {
@@ -84,6 +88,7 @@ export const products: Product[] = [
     category: "Bags", material: "Cotton",
     status: { tone: "sale", label: "Sale" }, swatches: ["indigo"],
     wash: "linear-gradient(155deg, #B4BCD6, #8B96BE)",
+    image: "https://images.unsplash.com/photo-1627667539472-75fbc7f4654d?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "A little structured bucket bag with a drawstring top. Holds more than it looks.",
   },
   {
@@ -91,6 +96,7 @@ export const products: Product[] = [
     category: "Home", material: "Hand-dyed wool",
     status: { tone: "best", label: "Best seller" }, swatches: ["rose", "moss", "turmeric"],
     wash: "linear-gradient(155deg, #E6BCC6, #CE93A6)",
+    image: "https://images.unsplash.com/photo-1632649027900-389e810204e6?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "An heirloom granny-square throw in five hand-dyed yarns. Six weeks of evenings in one blanket.",
   },
   {
@@ -98,6 +104,7 @@ export const products: Product[] = [
     category: "Home", material: "Herb-dyed cotton",
     status: { tone: "eco", label: "Eco cotton" }, swatches: ["teal", "moss"],
     wash: "linear-gradient(155deg, #A9CFC9, #79B0A8)",
+    image: "https://images.unsplash.com/photo-1700171518313-5dd219beaaa6?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "Four sturdy coasters in undyed and herb-dyed cotton. The everyday kind of handmade.",
   },
   {
@@ -105,6 +112,7 @@ export const products: Product[] = [
     category: "Kids", material: "Merino",
     status: null, swatches: ["rose"],
     wash: "linear-gradient(155deg, #EFC9D0, #DCA1B0)",
+    image: "https://images.unsplash.com/photo-1602773974733-b56200c8653f?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "Tiny merino booties with a ribbon tie. A first-thing-they-wear kind of gift.",
   },
   {
@@ -112,6 +120,7 @@ export const products: Product[] = [
     category: "Home", material: "Jute",
     status: null, swatches: ["moss"],
     wash: "linear-gradient(155deg, #D7DBAF, #AFB87E)",
+    image: "https://images.unsplash.com/photo-1519412849983-957822373d02?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "A macramé-meets-crochet hanger for your favourite pothos. Holds up to a 6-inch pot.",
   },
   {
@@ -119,6 +128,7 @@ export const products: Product[] = [
     category: "Accessories", material: "Two-tone wool",
     status: { tone: "limited", label: "Limited" }, swatches: ["indigo", "turmeric"],
     wash: "linear-gradient(155deg, #B7BFD8, #8E99C0)",
+    image: "https://images.unsplash.com/photo-1470049384172-927891aad5e9?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "A snug ribbed beanie in two-tone hand-dyed wool. Small batch — twelve made this season.",
   },
   {
@@ -126,6 +136,7 @@ export const products: Product[] = [
     category: "Home", material: "Fine cotton",
     status: null, swatches: ["turmeric", "teal"],
     wash: "linear-gradient(155deg, #EED6A0, #DCBD78)",
+    image: "https://images.unsplash.com/photo-1589912187345-e6f884f958af?auto=format&fit=crop&w=500&h=625&q=80",
     blurb: "Two fine-thread doilies for the table you set when someone special visits.",
   },
 ];
@@ -150,12 +161,33 @@ export const makers: Maker[] = [
     quote: "Dyes her own yarn with marigold and walnut husk from the garden." },
 ];
 
-export const spotlight: MakerSpotlight = {
-  name: "Sita Shrestha", location: "Bhaktapur, Bagmati", initials: "SS", tone: "rust",
-  bio: "A mother of two who taught herself to crochet from a borrowed library book. Today she makes the Market tote and Granny throw — and mentors three younger makers on her street.",
-  quote: "Crochets at dawn before the kids wake up. Every loop is a meditation.",
-  stats: [["47", "pieces sold"], ["4.9 ★", "maker rating"], ["8", "repeat buyers"]],
-};
+// Three maker stories for the MakerSpotlight carousel
+export const stories: MakerSpotlight[] = [
+  {
+    name: "Sita Shrestha", location: "Bhaktapur, Bagmati",
+    initials: "SS", tone: "rust",
+    portrait: "https://images.unsplash.com/photo-1716620475173-7c48a8d45f83?auto=format&fit=crop&w=600&h=750&q=80",
+    bio: "A mother of two who taught herself to crochet from a borrowed library book. Today she makes the Market tote and Granny throw — and mentors three younger makers on her street.",
+    quote: "Crochets at dawn before the kids wake up. Every loop is a meditation.",
+    stats: [["47", "pieces sold"], ["4.9 ★", "maker rating"], ["8", "repeat buyers"]],
+  },
+  {
+    name: "Kamala Tamang", location: "Lalitpur, Bagmati",
+    initials: "KT", tone: "teal",
+    portrait: "https://images.unsplash.com/photo-1695883447569-80abcd3030c0?auto=format&fit=crop&w=600&h=750&q=80",
+    bio: "Learned to crochet from her grandmother at age eleven. Today she teaches six women in her ward — turning an inherited skill into a livelihood for her whole neighbourhood.",
+    quote: "My grandmother's hands taught mine. Now mine teach others.",
+    stats: [["31", "pieces sold"], ["5.0 ★", "maker rating"], ["3", "apprentices"]],
+  },
+  {
+    name: "Anita Gurung", location: "Pokhara, Gandaki",
+    initials: "AG", tone: "rose",
+    portrait: "https://images.unsplash.com/photo-1702534246793-42a5365369bc?auto=format&fit=crop&w=600&h=750&q=80",
+    bio: "Dyes her own yarn with marigold and walnut husk from the garden. Every colour she uses is grown, not bought — and the pieces show it in ways synthetic dye never can.",
+    quote: "The garden is my palette. I just have to learn to listen to it.",
+    stats: [["19", "pieces sold"], ["4.8 ★", "maker rating"], ["12", "dye plants grown"]],
+  },
+];
 
 export const testimonials: Testimonial[] = [
   { quote: "The tote is even lovelier in person. Knowing Sita made it makes it special.",

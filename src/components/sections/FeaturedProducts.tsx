@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useProducts } from "@/hooks/useProducts";
-import { categories, type YarnColor } from "@/services/mockData";
+import { categories } from "@/services/mockData";
 import ProductCard from "@/components/ui/ProductCard";
 import { useQuickViewStore } from "@/stores/quickViewStore";
 
@@ -53,33 +53,28 @@ function CategoryRail({ active, onPick }: CategoryRailProps) {
   );
 }
 
-// ─── Yarn filter chips ────────────────────────────────────────────────────
-const YARN_CHIP_COLORS: Record<string, string> = {
-  all:      "",
-  moss:     "#6E7B46",
-  teal:     "#2F7E78",
-  rose:     "#C06B83",
-  indigo:   "#485684",
-  turmeric: "#D69A2D",
-};
-const YARN_CHIPS: [YarnColor | "all", string][] = [
-  ["all", "All"], ["moss", "Moss"], ["teal", "Teal"],
-  ["rose", "Rose"], ["indigo", "Indigo"], ["turmeric", "Turmeric"],
+// ─── Maker filter chips ───────────────────────────────────────────────────
+const MAKER_CHIPS: { key: string; label: string; short: string; color: string }[] = [
+  { key: "all",            label: "All makers",     short: "All", color: "" },
+  { key: "Sita Shrestha",  label: "Sita Shrestha",  short: "SS",  color: "#B05432" },
+  { key: "Kamala Tamang",  label: "Kamala Tamang",  short: "KT",  color: "#2F7E78" },
+  { key: "Anita Gurung",   label: "Anita Gurung",   short: "AG",  color: "#C06B83" },
+  { key: "Maya Lama",      label: "Maya Lama",       short: "ML",  color: "#6E7B46" },
 ];
 
 // ─── Main section ──────────────────────────────────────────────────────────
 export default function FeaturedProducts() {
   const [category, setCategory] = useState("all");
-  const [yarn, setYarn]         = useState<YarnColor | "all">("all");
+  const [maker, setMaker]       = useState("all");
 
   const openQuickView = useQuickViewStore((s) => s.open);
   const { data, isLoading, isError } = useProducts();
 
-  const list   = data ?? [];
-  const shown  = list.filter(
+  const list  = data ?? [];
+  const shown = list.filter(
     (p) =>
       (category === "all" || p.category === category) &&
-      (yarn === "all" || p.swatches.includes(yarn as YarnColor))
+      (maker === "all"    || p.maker === maker)
   );
 
   return (
@@ -106,33 +101,35 @@ export default function FeaturedProducts() {
             </h2>
           </div>
 
-          {/* Yarn filter chips */}
+          {/* Maker filter chips */}
           <div className="flex flex-wrap gap-2">
-            {YARN_CHIPS.map(([c, label]) => {
-              const active = yarn === c;
-              const count  = c === "all" ? list.length : list.filter((p) => p.swatches.includes(c as YarnColor)).length;
+            {MAKER_CHIPS.map(({ key, label, short, color }) => {
+              const active = maker === key;
+              const count  = key === "all"
+                ? list.length
+                : list.filter((p) => p.maker === key).length;
               return (
                 <button
-                  key={c}
+                  key={key}
                   type="button"
-                  onClick={() => setYarn(c)}
-                  className={`inline-flex items-center gap-2 min-h-[36px] px-[14px] py-[7px] rounded-full border font-body font-medium transition-colors cursor-pointer ${
+                  onClick={() => setMaker(key)}
+                  className={`inline-flex items-center gap-[7px] min-h-[36px] px-[14px] py-[7px] rounded-full border font-body font-medium transition-colors cursor-pointer ${
                     active
                       ? "bg-fc-night text-fc-wheat border-fc-night"
                       : "bg-white text-fc-night border-fc-night/[0.12] hover:border-fc-night/30"
                   }`}
                   style={{ fontSize: "0.8125rem" }}
                 >
-                  {c !== "all" && (
+                  {key !== "all" && (
                     <span
-                      className="w-[13px] h-[13px] rounded-full flex-none"
-                      style={{ background: YARN_CHIP_COLORS[c], border: "0.5px solid rgba(28,21,16,0.15)" }}
-                    />
+                      className="w-[18px] h-[18px] rounded-full flex-none grid place-items-center text-white flex-shrink-0"
+                      style={{ background: color, fontSize: "7px", fontWeight: 700, letterSpacing: "0.02em" }}
+                    >
+                      {short}
+                    </span>
                   )}
-                  {label}
-                  <span className="text-[11px] opacity-55 tabular-nums">
-                    {count}
-                  </span>
+                  {key === "all" ? "All" : label.split(" ")[0]}
+                  <span className="text-[11px] opacity-55 tabular-nums">{count}</span>
                 </button>
               );
             })}
@@ -153,11 +150,11 @@ export default function FeaturedProducts() {
         ) : shown.length === 0 ? (
           <div className="text-center py-24 border border-dashed border-fc-night/20 rounded-lg">
             <p className="font-display italic font-light text-xl text-fc-night/40 m-0">
-              No pieces in this colour yet — a maker is on it.
+              Nothing here yet — try a different maker or category.
             </p>
             <button
               type="button"
-              onClick={() => { setCategory("all"); setYarn("all"); }}
+              onClick={() => { setCategory("all"); setMaker("all"); }}
               className="mt-4 bg-transparent border-none text-fc-rust font-body font-semibold text-sm cursor-pointer hover:underline"
             >
               Clear filters →

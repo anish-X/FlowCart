@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import { useQuickViewStore } from "@/stores/quickViewStore";
@@ -113,18 +114,19 @@ export default function QuickViewModal() {
 
           {/* Left — product image */}
           <div
-            className="relative grid place-items-center"
+            className="relative"
             style={{ aspectRatio: "4 / 5", background: product.wash }}
           >
-            <span
-              className="font-display italic font-light text-[18px] text-fc-earth/40 select-none"
-              style={{ fontVariationSettings: "'opsz' 48" }}
-            >
-              {product.name}
-            </span>
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 380px"
+            />
             {product.status && (
               <span
-                className={`absolute top-[14px] left-[14px] font-body text-[10px] font-semibold uppercase tracking-[0.06em] px-2 py-1 rounded-sm ${BADGE_STYLES[product.status.tone] ?? ""}`}
+                className={`absolute top-[14px] left-[14px] z-10 font-body text-[10px] font-semibold uppercase tracking-[0.06em] px-2 py-1 rounded-sm ${BADGE_STYLES[product.status.tone] ?? ""}`}
               >
                 {product.status.label}
               </span>

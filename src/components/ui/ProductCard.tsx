@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useWishlistStore } from "@/stores/wishlistStore";
 import { type Product, formatNPR } from "@/services/mockData";
 
@@ -52,21 +53,21 @@ export default function ProductCard({ product, onQuickView, animationDelay = 0 }
     >
       {/* ── Image area ─────────────────────────────────────────────── */}
       <div
-        className="relative grid place-items-center"
+        className="relative"
         style={{ aspectRatio: "4 / 5", background: product.wash }}
       >
-        {/* Product name — italic watermark, matches design exactly */}
-        <span
-          className="font-display italic font-light text-[15px] select-none pointer-events-none"
-          style={{ color: "rgba(74,46,26,0.40)", fontVariationSettings: "'opsz' 48" }}
-        >
-          {product.name}
-        </span>
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        />
 
         {/* Status badge — top-left */}
         {badge && product.status && (
           <span
-            className="absolute top-[10px] left-[10px] font-body text-[10px] font-semibold uppercase tracking-[0.06em] px-2 py-[3px] rounded-sm"
+            className="absolute top-[10px] left-[10px] z-10 font-body text-[10px] font-semibold uppercase tracking-[0.06em] px-2 py-[3px] rounded-sm"
             style={{ background: badge.bg, color: badge.color }}
           >
             {product.status.label}
@@ -78,7 +79,7 @@ export default function ProductCard({ product, onQuickView, animationDelay = 0 }
           type="button"
           aria-label={isSaved ? "Remove from wishlist" : "Save to wishlist"}
           onClick={(e) => { e.stopPropagation(); toggle(product.id); }}
-          className="absolute top-2 right-2 w-[34px] h-[34px] grid place-items-center rounded-full border-none cursor-pointer transition-colors"
+          className="absolute top-2 right-2 z-10 w-[34px] h-[34px] grid place-items-center rounded-full border-none cursor-pointer transition-colors"
           style={{ background: "rgba(248,243,235,0.90)" }}
         >
           <svg width="17" height="17" viewBox="0 0 24 24"

@@ -19,13 +19,10 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="bg-fc-paper">
-      <div
-        className="max-w-[1280px] mx-auto px-8 py-[120px] grid items-start gap-16"
-        style={{ gridTemplateColumns: "0.8fr 1.2fr" }}
-      >
+      <div className="max-w-[1280px] mx-auto px-8 py-[120px] grid items-start gap-12 lg:gap-16 lg:[grid-template-columns:0.8fr_1.2fr]">
 
-        {/* ── Left — sticky heading ──────────────────────────────── */}
-        <div className="sticky top-24">
+        {/* ── Left — sticky heading (sticky only on large screens) ── */}
+        <div className="lg:sticky lg:top-24">
           <span className="block font-body text-[11px] font-medium uppercase tracking-[0.08em] text-fc-rust mb-2">
             Good to know
           </span>
@@ -74,18 +71,26 @@ export default function FAQ() {
                       </span>
                     </button>
 
-                    {/* Answer — CSS maxHeight transition, matches design exactly */}
+                    {/* Answer — grid-rows trick: animates to exact content height,
+                        no hardcoded max-height guess needed */}
                     <div
                       style={{
-                        maxHeight: isOpen ? "240px" : "0",
-                        opacity: isOpen ? 1 : 0,
-                        overflow: "hidden",
-                        transition: "max-height 0.6s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.6s cubic-bezier(0.25,0.46,0.45,0.94)",
+                        display: "grid",
+                        gridTemplateRows: isOpen ? "1fr" : "0fr",
+                        transition: "grid-template-rows 0.38s cubic-bezier(0.25,0.46,0.45,0.94)",
                       }}
                     >
-                      <p className="m-0 px-1 pb-5 max-w-[58ch] font-body text-[13px] leading-[1.65] text-[#6B5742]">
-                        {item.a}
-                      </p>
+                      <div
+                        style={{
+                          overflow: "hidden",
+                          opacity: isOpen ? 1 : 0,
+                          transition: "opacity 0.3s ease",
+                        }}
+                      >
+                        <p className="m-0 px-1 pb-5 max-w-[58ch] font-body text-[13px] leading-[1.65] text-[#6B5742]">
+                          {item.a}
+                        </p>
+                      </div>
                     </div>
 
                   </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import Avatar from "@/components/ui/Avatar";
@@ -104,22 +105,18 @@ export default function Hero() {
         {/* ── Right — maker portrait panel ──────────────────────────────── */}
         <div className="fc-hero-item hidden md:block relative" style={{ aspectRatio: "4 / 5" }}>
 
-          {/* Main gradient portrait */}
-          <div
-            className="absolute inset-0 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(28,21,16,0.14)] grid place-items-center"
-            style={{ background: "linear-gradient(160deg, #E7CFA6, #CDA978)" }}
-          >
-            <span
-              className="font-display italic font-light text-[17px] text-fc-earth/40"
-              style={{ fontVariationSettings: "'opsz' 48" }}
-            >
-              maker portrait
-            </span>
-
+          {/* Main portrait */}
+          <div className="absolute inset-0 rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(28,21,16,0.14)]">
+            <Image
+              src="https://images.unsplash.com/photo-1731869500410-0d8eeadf2b17?auto=format&fit=crop&w=720&h=900&q=80"
+              alt="This week's maker"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 45vw"
+              priority
+            />
             {/* "This week's maker" chip — top-left overlay */}
-            <span
-              className="absolute top-4 left-4 font-body text-[9px] font-semibold uppercase tracking-[0.1em] text-fc-earth bg-fc-paper/[0.82] backdrop-blur-sm px-[10px] py-[6px] rounded-full"
-            >
+            <span className="absolute top-4 left-4 font-body text-[9px] font-semibold uppercase tracking-[0.1em] text-fc-earth bg-fc-paper/[0.82] backdrop-blur-sm px-[10px] py-[6px] rounded-full">
               This week&apos;s maker
             </span>
           </div>
