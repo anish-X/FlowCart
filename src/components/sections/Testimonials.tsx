@@ -42,7 +42,7 @@ export default function Testimonials() {
   );
 
   return (
-    <section ref={containerRef} className="max-w-[1280px] mx-auto px-8 py-[120px]">
+    <section ref={containerRef} className="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 lg:py-[120px]">
 
       {/* Header */}
       <div className="text-center mb-16">
@@ -63,7 +63,7 @@ export default function Testimonials() {
           <div
             key={i}
             data-testimonial
-            className="bg-fc-paper border border-fc-night/[0.10] rounded-xl p-6 flex flex-col gap-4"
+            className="bg-fc-paper border border-fc-night/[0.10] rounded-xl p-6 flex flex-col gap-4 transition-shadow hover:shadow-[0_8px_24px_rgba(28,21,16,0.09)] hover:border-fc-night/20"
           >
             <Stars count={t.rating} />
 

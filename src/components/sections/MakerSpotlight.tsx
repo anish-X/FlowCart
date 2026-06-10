@@ -75,16 +75,12 @@ export default function MakerSpotlight() {
 
   return (
     <section id="stories" ref={containerRef} className="bg-fc-night overflow-hidden">
-      <div
-        className="max-w-[1280px] mx-auto px-8 py-[120px] grid items-center gap-16"
-        style={{ gridTemplateColumns: "0.82fr 1.18fr" }}
-      >
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-14 lg:py-[120px] grid items-center gap-10 lg:gap-16 lg:[grid-template-columns:0.82fr_1.18fr]">
 
         {/* ── Portrait ──────────────────────────────────────────────────── */}
         <div
           data-spotlight
-          className="relative rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(28,21,16,0.22)]"
-          style={{ aspectRatio: "4 / 5" }}
+          className="relative rounded-xl overflow-hidden shadow-[0_12px_40px_rgba(28,21,16,0.22)] aspect-[4/3] lg:aspect-[4/5]"
         >
           <div ref={portraitRef} className="absolute inset-0">
             <Image
@@ -157,7 +153,7 @@ export default function MakerSpotlight() {
           </p>
 
           {/* Stats */}
-          <div className="flex gap-16 mt-8 flex-wrap">
+          <div className="flex gap-8 lg:gap-16 mt-8 flex-wrap">
             {story.stats.map(([value, label]) => (
               <div key={label} className="flex flex-col gap-[2px]">
                 <span

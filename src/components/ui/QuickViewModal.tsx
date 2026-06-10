@@ -112,10 +112,10 @@ export default function QuickViewModal() {
         {/* Two-column grid — stacks on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2">
 
-          {/* Left — product image */}
+          {/* Left — shorter on mobile so details are reachable without scrolling */}
           <div
-            className="relative"
-            style={{ aspectRatio: "4 / 5", background: product.wash }}
+            className="relative aspect-[4/3] sm:aspect-[4/5]"
+            style={{ background: product.wash }}
           >
             <Image
               src={product.image}
@@ -134,7 +134,7 @@ export default function QuickViewModal() {
           </div>
 
           {/* Right — product details */}
-          <div className="p-8 flex flex-col gap-[10px]">
+          <div className="p-5 sm:p-8 flex flex-col gap-[10px]">
             {/* Category + material */}
             <span className="font-body text-[11px] font-medium uppercase tracking-[0.06em] text-[#6B5742]">
               {product.category} · {product.material}

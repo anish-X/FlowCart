@@ -6,8 +6,8 @@ interface PromoBannerProps {
 
 export default function PromoBanner({ onShop }: PromoBannerProps) {
   return (
-    <section className="max-w-[1280px] mx-auto px-8 pt-16">
-      <div className="relative bg-fc-rust rounded-xl px-16 py-16 flex items-center justify-between gap-8 flex-wrap overflow-hidden">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 pt-12 lg:pt-16">
+      <div className="relative bg-fc-rust rounded-xl px-6 py-10 sm:px-10 sm:py-12 lg:px-16 lg:py-16 flex items-center justify-between gap-6 flex-wrap overflow-hidden">
 
         {/* Stitched diagonal texture — decorative */}
         <div

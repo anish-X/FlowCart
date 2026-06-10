@@ -56,10 +56,7 @@ export default function Footer() {
   return (
     <footer id="sell" className="bg-fc-earth text-fc-wheat/[0.86]">
       {/* Main grid */}
-      <div
-        className="max-w-[1280px] mx-auto px-8 pt-[120px] pb-16 grid gap-16"
-        style={{ gridTemplateColumns: "1.5fr 1fr 1.5fr" }}
-      >
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 pt-16 lg:pt-[120px] pb-10 lg:pb-16 grid grid-cols-1 sm:grid-cols-2 lg:[grid-template-columns:1.5fr_1fr_1.5fr] gap-10 lg:gap-16">
         {/* ── Brand + social ──────────────────────────────────── */}
         <div>
           <span
@@ -101,7 +98,7 @@ export default function Footer() {
         </div>
 
         {/* ── Link columns ────────────────────────────────────── */}
-        <div className="flex gap-16 flex-wrap">
+        <div className="grid grid-cols-2 gap-8">
           {LINK_COLS.map(({ heading, links }) => (
             <div key={heading}>
               <h3 className="m-0 mb-4 font-body text-[11px] font-semibold uppercase tracking-[0.08em] text-fc-marigold">
@@ -173,7 +170,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-fc-wheat/[0.18]">
-        <div className="max-w-[1280px] mx-auto px-8 py-4 flex justify-between items-center gap-4 flex-wrap font-body text-[11px] text-fc-wheat/60">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-4 flex justify-between items-center gap-4 flex-wrap font-body text-[11px] text-fc-wheat/60">
           <span>© 2026 FlowCart Nepal · Handmade, never mass-made</span>
           <div className="flex gap-6">
             <span>Made with love and care</span>

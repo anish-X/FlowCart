@@ -29,7 +29,7 @@ interface CategoryRailProps {
 function CategoryRail({ active, onPick }: CategoryRailProps) {
   return (
     <div
-      className="flex gap-2 overflow-x-auto px-8 pb-1 scrollbar-none"
+      className="flex gap-2 overflow-x-auto px-4 sm:px-8 pb-1 scrollbar-none"
       style={{ scrollbarWidth: "none" }}
     >
       {categories.map((c) => {
@@ -80,12 +80,11 @@ export default function FeaturedProducts() {
   return (
     <section id="shop" className="pb-[120px]">
 
-      {/* Category rail — full width, no container padding */}
       <div className="max-w-[1280px] mx-auto pt-8">
         <CategoryRail active={category} onPick={setCategory} />
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8">
 
         {/* Section header + yarn chips */}
         <div className="flex items-end justify-between flex-wrap gap-4 my-6">

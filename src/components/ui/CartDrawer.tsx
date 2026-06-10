@@ -36,7 +36,7 @@ export default function CartDrawer() {
           }}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-8 py-4 border-b border-fc-night/[0.12]">
+          <div className="flex items-center justify-between px-5 sm:px-8 py-4 border-b border-fc-night/[0.12]">
             <h2
               className="m-0 font-display font-light text-fc-earth"
               style={{ fontSize: "1.25rem", fontVariationSettings: "'opsz' 48" }}
@@ -58,7 +58,7 @@ export default function CartDrawer() {
           </div>
 
           {/* Items list */}
-          <div className="flex-1 overflow-auto px-8 py-4 flex flex-col gap-4">
+          <div className="flex-1 overflow-auto px-5 sm:px-8 py-4 flex flex-col gap-4">
             {items.length === 0 ? (
               <p
                 className="font-display italic font-light text-[16px] text-[#6B5742] text-center mt-16"
@@ -127,7 +127,7 @@ export default function CartDrawer() {
 
           {/* Footer — subtotal + checkout */}
           {items.length > 0 && (
-            <div className="border-t border-fc-night/[0.12] px-8 py-6 flex flex-col gap-4">
+            <div className="border-t border-fc-night/[0.12] px-5 sm:px-8 py-5 sm:py-6 flex flex-col gap-4">
               <div className="flex justify-between items-baseline">
                 <span className="font-body text-[13px] text-[#6B5742]">Subtotal</span>
                 <span

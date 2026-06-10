@@ -33,10 +33,7 @@ export default function Hero() {
       ref={containerRef}
       className="bg-fc-wheat border-b border-fc-night/[0.12] overflow-hidden"
     >
-      <div
-        className="max-w-[1280px] mx-auto px-8 py-[120px] grid items-center gap-16"
-        style={{ gridTemplateColumns: "1.1fr 0.9fr" }}
-      >
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-14 lg:py-[120px] grid items-center gap-10 lg:gap-16 lg:[grid-template-columns:1.1fr_0.9fr]">
 
         {/* ── Left — copy ───────────────────────────────────────────────── */}
         <div>

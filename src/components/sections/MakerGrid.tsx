@@ -32,7 +32,7 @@ export default function MakerGrid() {
       ref={containerRef}
       className="bg-fc-wheat"
     >
-      <div className="max-w-[1280px] mx-auto px-8 py-[120px]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 lg:py-[120px]">
 
         {/* Header */}
         <div className="text-center mb-16">

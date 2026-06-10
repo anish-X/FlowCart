@@ -19,7 +19,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="bg-fc-paper">
-      <div className="max-w-[1280px] mx-auto px-8 py-[120px] grid items-start gap-12 lg:gap-16 lg:[grid-template-columns:0.8fr_1.2fr]">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 py-16 lg:py-[120px] grid items-start gap-12 lg:gap-16 lg:[grid-template-columns:0.8fr_1.2fr]">
 
         {/* ── Left — sticky heading (sticky only on large screens) ── */}
         <div className="lg:sticky lg:top-24">
@@ -52,11 +52,11 @@ export default function FAQ() {
                       type="button"
                       onClick={() => setOpenIndex(isOpen ? -1 : i)}
                       aria-expanded={isOpen}
-                      className="w-full flex items-center justify-between gap-4 py-[18px] px-1 min-h-[44px] bg-transparent border-none cursor-pointer text-left"
+                      className="w-full flex items-center justify-between gap-4 py-[18px] px-1 min-h-[44px] bg-transparent border-none cursor-pointer text-left group hover:text-fc-rust transition-colors"
                     >
                       <span
-                        className="font-display font-light text-fc-earth"
-                        style={{ fontSize: "1.25rem", fontVariationSettings: "'opsz' 48" }}
+                        className="font-display font-light text-fc-earth group-hover:text-fc-rust transition-colors"
+                        style={{ fontSize: "1.125rem", fontVariationSettings: "'opsz' 48" }}
                       >
                         {item.q}
                       </span>

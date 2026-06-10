@@ -65,7 +65,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-[200] bg-fc-night border-b border-fc-wheat/[0.14]">
-      <div className="max-w-[1280px] mx-auto px-8 h-[68px] flex items-center justify-between gap-8">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-8 h-[68px] flex items-center justify-between gap-4 sm:gap-8">
 
         {/* Left — hamburger (mobile) + wordmark */}
         <div className="flex items-center gap-4">
