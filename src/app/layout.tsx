@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Instrument_Sans } from "next/font/google";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -30,7 +31,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${instrumentSans.variable}`}
     >
       <body className="font-body bg-fc-white text-fc-night antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
