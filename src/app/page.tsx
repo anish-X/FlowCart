@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import PromoBanner from "@/components/sections/PromoBanner";
 import FeaturedProducts from "@/components/sections/FeaturedProducts";
+import QuickViewModal from "@/components/ui/QuickViewModal";
 
 export default function Home() {
   const scrollTo = (id: string) => {
@@ -19,6 +20,7 @@ export default function Home() {
         <PromoBanner onShop={() => scrollTo("shop")} />
         <FeaturedProducts />
       </main>
+      <QuickViewModal />
     </>
   );
 }

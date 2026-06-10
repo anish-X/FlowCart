@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useProducts } from "@/hooks/useProducts";
 import { categories, type YarnColor } from "@/services/mockData";
 import ProductCard from "@/components/ui/ProductCard";
+import { useQuickViewStore } from "@/stores/quickViewStore";
 
 // ─── Skeleton — shown while fetch resolves ─────────────────────────────────
 function ProductCardSkeleton() {
@@ -71,6 +72,7 @@ export default function FeaturedProducts() {
   const [category, setCategory] = useState("all");
   const [yarn, setYarn]         = useState<YarnColor | "all">("all");
 
+  const openQuickView = useQuickViewStore((s) => s.open);
   const { data, isLoading, isError } = useProducts();
 
   const list   = data ?? [];
@@ -167,10 +169,7 @@ export default function FeaturedProducts() {
                 key={p.id}
                 product={p}
                 animationDelay={i * 0.05}
-                onQuickView={() => {
-                  // QuickView store wired in Phase 4
-                  console.log("quick view:", p.name);
-                }}
+                onQuickView={() => openQuickView(p)}
               />
             ))}
           </div>
