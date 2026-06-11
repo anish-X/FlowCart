@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
 import Avatar from "@/components/ui/Avatar";
 import { stories } from "@/services/mockData";
+import { useFilterStore } from "@/stores/filterStore";
 
 // Direction is stored in a ref so the animate-in useGSAP can read it
 // without it being a reactive dependency that triggers extra renders.
@@ -18,6 +19,13 @@ export default function MakerSpotlight() {
   const isFirstRender = useRef(true);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const setMakerFilter = useFilterStore((s) => s.setMakerFilter);
+
+  const shopMaker = (name: string) => {
+    setMakerFilter(name);
+    const el = document.getElementById("shop");
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 68, behavior: "smooth" });
+  };
 
   // ── Scroll reveal on first paint ────────────────────────────────────────
   useGSAP(
@@ -195,6 +203,7 @@ export default function MakerSpotlight() {
 
             <button
               type="button"
+              onClick={() => shopMaker(story.name)}
               className="ml-1 font-body text-sm font-semibold text-white bg-fc-rust px-6 py-[13px] rounded-sm hover:bg-fc-marigold hover:text-fc-night transition-colors active:scale-[0.97]"
             >
               Shop {story.name.split(" ")[0]}&apos;s pieces

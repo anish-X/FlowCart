@@ -5,6 +5,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { categories } from "@/services/mockData";
 import ProductCard from "@/components/ui/ProductCard";
 import { useQuickViewStore } from "@/stores/quickViewStore";
+import { useFilterStore } from "@/stores/filterStore";
 
 // ─── Skeleton — shown while fetch resolves ─────────────────────────────────
 function ProductCardSkeleton() {
@@ -65,7 +66,8 @@ const MAKER_CHIPS: { key: string; label: string; short: string; color: string }[
 // ─── Main section ──────────────────────────────────────────────────────────
 export default function FeaturedProducts() {
   const [category, setCategory] = useState("all");
-  const [maker, setMaker]       = useState("all");
+  const maker    = useFilterStore((s) => s.makerFilter);
+  const setMaker = useFilterStore((s) => s.setMakerFilter);
 
   const openQuickView = useQuickViewStore((s) => s.open);
   const { data, isLoading, isError } = useProducts();
