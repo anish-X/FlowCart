@@ -255,9 +255,9 @@ export const makers: Maker[] = [
 // Three maker stories for the MakerSpotlight carousel
 export const stories: MakerSpotlight[] = [
   {
-    name: "Sita Shrestha",
-    location: "Bhaktapur, Bagmati",
-    initials: "SS",
+    name: "Yunchhopma Limbu",
+    location: "Itahari, Sunsari",
+    initials: "YL",
     tone: "rust",
     portrait: "/makers_image/maker_yuncho.jpeg",
     bio: "Every time I watched a pair of hands dance with yarn, something deep within me whispered, this is where you belong. With no teacher but curiosity, I taught myself one stitch, one mistake, one quiet victory at a time. Years of practice slowly turned scattered threads into stories, and a simple hobby into a lifelong calling. Today, every piece I create is woven with patience, love, and a little piece of my soul.",
