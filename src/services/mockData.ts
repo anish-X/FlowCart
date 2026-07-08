@@ -166,7 +166,7 @@ export const stories: MakerSpotlight[] = [
   {
     name: "Sita Shrestha", location: "Bhaktapur, Bagmati",
     initials: "SS", tone: "rust",
-    portrait: "https://images.unsplash.com/photo-1716620475173-7c48a8d45f83?auto=format&fit=crop&w=600&h=750&q=80",
+    portrait: "/makers_image/maker_yuncho.jpeg",
     bio: "A mother of two who taught herself to crochet from a borrowed library book. Today she makes the Market tote and Granny throw — and mentors three younger makers on her street.",
     quote: "Crochets at dawn before the kids wake up. Every loop is a meditation.",
     stats: [["47", "pieces sold"], ["4.9 ★", "maker rating"], ["8", "repeat buyers"]],
